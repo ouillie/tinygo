@@ -360,7 +360,7 @@ jobs:
         run: |
           sudo apt-get install --no-install-recommends ninja-build
           git submodule update --init lib/binaryen
-          make CROSS=${{ matrix.toolchain }} binaryen
+          make CROSS=${{ matrix.toolchain }} STATIC=1 binaryen
       - name: Install fpm
         run: |
           sudo gem install --version 4.0.7 public_suffix
@@ -368,7 +368,7 @@ jobs:
           sudo gem install --no-document fpm
       - name: Build TinyGo binary
         run: |
-          make CROSS=${{ matrix.toolchain }}
+          make CROSS=${{ matrix.toolchain }} STATIC=1
       - name: Download amd64 release
         uses: actions/download-artifact@v4
         with:
@@ -383,7 +383,7 @@ jobs:
           cp -p build/wasm-opt build/release/tinygo/bin
       - name: Create ${{ matrix.goarch }} release
         run: |
-          make release deb RELEASEONLY=1 DEB_ARCH=${{ matrix.libc }}
+          make release deb RELEASEONLY=1 DEB_ARCH=${{ matrix.libc }} STATIC=1
           cp -p build/release.tar.gz /tmp/tinygo${{ steps.version.outputs.version }}.linux-${{ matrix.goarch }}.tar.gz
           cp -p build/release.deb    /tmp/tinygo_${{ steps.version.outputs.version }}_${{ matrix.libc }}.deb
       - name: Publish release artifact
