@@ -72,7 +72,7 @@ ifeq (1, $(STATIC))
     # default stack size is 128kB and LLVM uses more than that.
     # For more information, see:
     # https://wiki.musl-libc.org/functional-differences-from-glibc.html#Thread-stack-size
-    CGO_LDFLAGS += -Wl,-z,stack-size=1048576
+    CGO_LDFLAGS += -Wl,-z,stack-size=1048576 -fPIC
     # Build wasm-opt with static linking.
     # For details, see:
     # https://github.com/WebAssembly/binaryen/blob/version_102/.github/workflows/ci.yml#L181
