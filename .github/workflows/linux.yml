@@ -360,7 +360,7 @@ jobs:
         run: |
           sudo apt-get install --no-install-recommends ninja-build
           git submodule update --init lib/binaryen
-          make CROSS=${{ matrix.toolchain }} STATIC=1 binaryen
+          make CROSS=${{ matrix.toolchain }} binaryen
       - name: Install fpm
         run: |
           sudo gem install --version 4.0.7 public_suffix
