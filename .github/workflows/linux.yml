@@ -340,7 +340,7 @@ jobs:
           # Install build dependencies.
           sudo apt-get install --no-install-recommends ninja-build
           # build!
-          make llvm-build CROSS=${{ matrix.toolchain }} STATIC=1 CGO_CFLAGS="-fPIC" CGO_CXXFLAGS="-fPIC"
+          make llvm-build CROSS=${{ matrix.toolchain }} STATIC=1 CGO_CFLAGS="-fPIC" CGO_CXXFLAGS="-fPIC" CGO_LDFLAGS="-fPIC"
           # Remove unnecessary object files (to reduce cache size).
           find llvm-build -name CMakeFiles -prune -exec rm -r '{}' \;
       - name: Save LLVM build cache
@@ -368,7 +368,7 @@ jobs:
           sudo gem install --no-document fpm
       - name: Build TinyGo binary
         run: |
-          make CROSS=${{ matrix.toolchain }} STATIC=1 CGO_CFLAGS="-fPIC" CGO_CXXFLAGS="-fPIC"
+          make CROSS=${{ matrix.toolchain }} STATIC=1 CGO_CFLAGS="-fPIC" CGO_CXXFLAGS="-fPIC" CGO_LDFLAGS="-fPIC"
       - name: Download amd64 release
         uses: actions/download-artifact@v4
         with:
