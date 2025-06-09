@@ -340,7 +340,7 @@ jobs:
           # Install build dependencies.
           sudo apt-get install --no-install-recommends ninja-build
           # build!
-          make llvm-build CROSS=${{ matrix.toolchain }}
+          make llvm-build CROSS=${{ matrix.toolchain }} STATIC=1 CFLAGS="-fPIC" CXXFLAGS="-fPIC"
           # Remove unnecessary object files (to reduce cache size).
           find llvm-build -name CMakeFiles -prune -exec rm -r '{}' \;
       - name: Save LLVM build cache
